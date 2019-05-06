@@ -1,3 +1,4 @@
 Error_log
 /__pycache__
 *.log
+*.ini

@@ -1,0 +1,9 @@
+PyYAML==3.12
+pyodbc==4.0.25
+requests==2.18.4
+python-json-logger==0.1.8
+cognite-sdk==0.7.1
+cognite==0.0.4
+cognite-logger==0.3.0
+cognite-uploader==0.1.8
+monotonic==1.5

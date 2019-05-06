@@ -1,0 +1,21 @@
+# Cognite configuration parameters
+# api_key is set in environemnt and retrived by the api_key value
+cognite:
+  server: https://api.cognitedata.com/api/0.5
+  project_name: energima
+  api_key: API_Cognite_dev
+
+energima:
+  login_pw: SA12_pw
+  login_un: SA12_un
+  ip_address: 62.101.215.102
+  log_file: "SA1_log.txt"
+
+input:
+  filename: "SA_objdata.json" # csv file. Used if file is used as input for generating db. Use this or the other values.
+  key: "Name" # Used as key in new table
+
+output:
+  upload_bytes_threshold: 5000000
+  raw_db: "energima-morten"
+  raw_table: "SA_20190208_ts_metadata"

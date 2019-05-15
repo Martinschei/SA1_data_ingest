@@ -4,5 +4,8 @@ This rep is a test rep for data ingestion from Energmia
 The modules communicate with the Sauter API for live date requests and posts to CDF
 ## Data ingestion from Go-IoT
 The modules communicate with the Go-IoT API for live date requests and posts to CDF
+## Asset hierarchy module
+The modules creates assets and posts to CDF
+
 ###### Comments and details
 ...to come...

@@ -5,6 +5,7 @@ import os
 import logging
 import datetime
 from datetime import datetime
+from dateutil import parser
 
 # Cogntie imports
 from cognite_logger import cognite_logger
@@ -77,12 +78,28 @@ def upload_datapoints_historical(logger, sensor_id, sensor_data, api_key, projec
     points = []
     for object in sensor_values:
         t = object["LocalTimestamp"]
-        if '.' in t:
-            timestamp = int(datetime.datetime.strptime(t, "%Y-%m-%dT%H:%M:%S.%f").timestamp() * 1000)
+        o = object["UtcOffset"]
+        hours = round(o/60)
+        minutes = o - hours*60
+        if hours < 0:
+            utcstring = '-'
         else:
-            timestamp = int(datetime.datetime.strptime(t, "%Y-%m-%dT%H:%M:%S").timestamp() * 1000)
+            utcstring = '+'
+        if 9.5>hours>-9.5:
+            utcstring += '0'
+            utcstring += str(abs(hours))
+        else:
+            utcstring+= str(abs(hours))
+        utcstring += ':'
+        if 9.5>minutes>-9.5:
+            utcstring += '0'
+            utcstring += str(abs(minutes))
+        else:
+            utcstring += str(abs(minutes))
+        t += utcstring
+        timestamp = int(parser.parse(t).timestamp()*1000)
         val = float(object["ReceivedValue"].replace(",", "."))
-        points.append(Datapoint(timestamp, val))
+        points.append(Datapoint(timestamp, val)
 
         if len(points) >= 10000:  # Post in batches of 10K
             try:

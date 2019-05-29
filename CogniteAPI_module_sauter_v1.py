@@ -81,7 +81,7 @@ def upload_datapoints_historical(logger, sensor_id, sensor_data, api_key, projec
         o = object["UtcOffset"]
         hours = round(o/60)
         minutes = o - hours*60
-        if hours < 0:
+        if o < 0:
             utcstring = '-'
         else:
             utcstring = '+'
@@ -99,7 +99,7 @@ def upload_datapoints_historical(logger, sensor_id, sensor_data, api_key, projec
         t += utcstring
         timestamp = int(parser.parse(t).timestamp()*1000)
         val = float(object["ReceivedValue"].replace(",", "."))
-        points.append(Datapoint(timestamp, val)
+        points.append(Datapoint(timestamp, val))
 
         if len(points) >= 10000:  # Post in batches of 10K
             try:
